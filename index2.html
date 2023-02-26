@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Raúl</title>
+    <style>
+        body {
+            background-color: aquamarine;
+        }
+
+        .text {
+            padding: 2px 8px;
+            margin-bottom: 6px;
+        }
+
+        .text:first-letter {
+            font-size: x-large;
+            font-weight: bolder;
+            font-style: oblique;
+        }
+
+        .text:nth-child(odd) {
+            background-color: burlywood;
+        }
+
+        .text:nth-child(even) {
+            background-color: khaki;
+        }
+
+        .text p:last-of-type::after {
+            content: "...";
+        }
+
+        .text p:only-child::after {
+            /* evita que lleven puntos suspensivos los párrafos aislados */
+            content: none;
+        }
+
+        .text p {
+            line-height: 5px;
+        }
+
+        #modal {
+            /* Todas éstas propiedades se aplicaran a lo que lleve el id "modal", que en éste caso es 
+            la ventana emergente que observaremos cuando cliquemos en "Ver detalles".*/
+            flex-direction: column;
+            display: flex;
+            visibility: hidden;
+            top: 20vh;
+            background: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            left: 55vh;
+            height: 50vh;
+            width: 75vw;
+            max-width: 600px;
+            max-height: 300px;
+            transition: all .9s;
+            opacity: 0;
+        }
+
+        .contenido {
+            /* Se aplicará sólo a lo que lleve la clase "contenido", que en éste caso es lo escrito dentro
+            de la ventana emergente, o modal, que observaremos cuando cliquemos en "Ver detalles".*/
+            padding: 10px;
+            color: white;
+        }
+
+        #mostrar-modal,
+        #cerrar-modal {
+            /* Se aplicará sólo a lo que lleve los id "mostrar-modal" y "cerrar-modal", que en éste caso son el 
+            input para el botón "Ver detalles" y el input para el botón "X" para cerrar la ventana modal.*/
+            display: none;
+        }
+
+        #mostrar-modal+label:hover {
+            /* Se aplicará cuando tengamos el cursor sobre lo que haya en la etiqueta label que se encuentra 
+            inmediatamente después de la etiqueta con el id "mostrar-modal", funciona de modo que se aplicará 
+            un color de fondo a éste elemento.*/
+            background: #388f79;
+        }
+
+        #mostrar-modal:checked~#modal {
+            /* Se aplicará cuando hayamos clicado al elemento que tenga el id "modal" que sea hermano, inmediato
+            o no, de lo que tenga el id "mostrar-modal", funcionará de forma que, en ese momento, sobreescribirá o 
+            cambiará la visibilidad de "#modal", de "hidden" (como está inicialmente) a visible y le da 1 de opacidad.*/
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #cerrar-modal+label {
+            /* Se aplicará a lo que haya en la etiqueta label que se encuentra 
+            inmediatamente después de la etiqueta con el id "cerrar-modal" */
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            background: tomato;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-radius: 50%;
+            align-self: flex-end;
+        }
+
+        .mostrar {
+            /* Se aplica a lo que tenga la clase "mostrar", que en éste caso es la etiqueta
+            label que contiene la "X" de el  botón para cerrar la ventana modal. */
+            cursor: pointer;
+            background-color: cornflowerblue;
+            margin-top: 2px;
+            padding: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Soldadito marinero</p>
+    <div class="text">
+        <p>Él camina despacito que las prisas no son buenas</p>
+        <p>En su brazo dobladita, con cuidado la chaqueta</p>
+        <p>Luego pasa por la calle dónde los chavales juegan</p>
+        <p>Él también quiso ser niño pero le pilló la guerra</p>
+    </div>
+    <div class="text">
+        <p>Soldadito marinero conociste a una sirena</p>
+        <p>De esas que dicen te quiero si ven la cartera llena</p>
+        <p>Escogiste a la más guapa y a la menos buena</p>
+        <p>Sin saber como ha venido te ha cogido la tormenta</p>
+    </div>
+    <div class="text">
+        <p>Él quería cruzar los mares y olvidar a su sirena</p>
+        <p>La verdad, no fue difícil cuando conoció a Mariela</p>
+        <p>Que tenía los ojos verdes y un negocio entre las piernas</p>
+        <p>Hay que ver que puntería, no te arrimas a una buena</p>
+    </div>
+    <div class="text">
+        <p>Soldadito marinero conociste a una sirena</p>
+        <p>De esas que dicen te quiero si ven la cartera llena</p>
+        <p>Escogiste la más guapa y a la menos buena</p>
+        <p>Sin saber como ha venido te ha cogido la tormenta</p>
+    </div>
+    <div class="text">
+        <p>Después de un invierno malo, una mala primavera
+        <p>Dime por que estas buscando una lágrima en la arena
+        <p>Después de un invierno malo</p>
+    </div>
+
+    <input id="mostrar-modal" name="modal" type="radio" />
+    <label class="mostrar" for="mostrar-modal">Ver detalles</label>
+
+    <div id="modal">
+        <input id="cerrar-modal" name="modal" type="radio" />
+        <label class="cerrar" for="cerrar-modal">X</label>
+        <div class="contenido">
+            <p>Autor: Fito & fitipaldis</p>
+            <p>Canción: Soldadito marinero</p>
+            <p>Letra: Letras.com</p>
+        </div>
+    </div>
+</body>
+
+</html>
